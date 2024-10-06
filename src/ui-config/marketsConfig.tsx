@@ -83,6 +83,7 @@ export enum CustomMarket {
   proto_fuji_v3 = 'proto_fuji_v3',
   proto_optimism_sepolia_v3 = 'proto_optimism_sepolia_v3',
   proto_scroll_sepolia_v3 = 'proto_scroll_sepolia_v3',
+  proto_scroll_testnet_v3 = 'proto_scroll_testnet_v3',
   proto_sepolia_v3 = 'proto_sepolia_v3',
   proto_base_sepolia_v3 = 'proto_base_sepolia_v3',
   // v3 mainnets
@@ -113,9 +114,39 @@ export enum CustomMarket {
 
 const apiKey = process.env.NEXT_PUBLIC_SUBGRAPH_API_KEY;
 
+const AaveV3ScrollTestnet = {
+  LENDING_POOL_ADDRESS_PROVIDER: '0xF0f060B94F45D75fa9270F73eA580614d56a01a9',
+  LENDING_POOL: '0xFDee84d977B3Dc2318eD3C1494e5d5215437bDfC',
+  WETH_GATEWAY: '0xdE50F839593Ce3AEc187c4c9c5de7ECaeAdc9b51',
+  FAUCET: '0x3D5B20f24C194D21a4BAA475681aBF53Fbe03e78',
+  WALLET_BALANCE_PROVIDER: '0xe863fE94Ee6c96aA77d50bf78D280DB724C55f15',
+  UI_POOL_DATA_PROVIDER: '0x23Cdd8FD2E395E0444cc03882b36520C205684eA',
+  UI_INCENTIVE_DATA_PROVIDER: '0x38340F1F43f29aC92808BbA967ae201BF2D1C0A5',
+};
+
+
 export const marketsData: {
   [key in keyof typeof CustomMarket]: MarketDataType;
 } = {
+  [CustomMarket.proto_scroll_testnet_v3]: {
+    marketTitle: 'Scroll Testnet',
+    market: CustomMarket.proto_scroll_testnet_v3,
+    v3: true,
+    chainId: ChainId.scroll_sepolia,
+    enabledFeatures: {
+      incentives: true,
+      faucet: true,
+    },
+    addresses: {
+      LENDING_POOL_ADDRESS_PROVIDER: AaveV3ScrollTestnet.LENDING_POOL_ADDRESS_PROVIDER,
+      LENDING_POOL: AaveV3ScrollTestnet.LENDING_POOL,
+      WETH_GATEWAY: AaveV3ScrollTestnet.WETH_GATEWAY,
+      FAUCET: AaveV3ScrollTestnet.FAUCET,
+      WALLET_BALANCE_PROVIDER: AaveV3ScrollTestnet.WALLET_BALANCE_PROVIDER,
+      UI_POOL_DATA_PROVIDER: AaveV3ScrollTestnet.UI_POOL_DATA_PROVIDER,
+      UI_INCENTIVE_DATA_PROVIDER: AaveV3ScrollTestnet.UI_INCENTIVE_DATA_PROVIDER,
+    },
+  },
   [CustomMarket.proto_mainnet_v3]: {
     marketTitle: 'Ethereum',
     market: CustomMarket.proto_mainnet_v3,

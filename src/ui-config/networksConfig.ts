@@ -326,7 +326,7 @@ export const networkConfigs: Record<string, BaseNetworkConfig> = {
     networkLogoPath: '/icons/networks/optimism.svg',
   },
   [ChainId.scroll_sepolia]: {
-    name: 'Scroll Sepolia',
+    name: 'Scroll Testnet',
     publicJsonRPCUrl: [
       'https://sepolia-rpc.scroll.io',
       'https://scroll-sepolia.blockpi.network/v1/rpc/public',

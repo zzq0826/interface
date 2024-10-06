@@ -22,8 +22,14 @@ export type Pool = {
 
 export const STAGING_ENV = process.env.NEXT_PUBLIC_ENV === 'staging';
 export const PROD_ENV = !process.env.NEXT_PUBLIC_ENV || process.env.NEXT_PUBLIC_ENV === 'prod';
+
+if(global?.window?.localStorage.getItem('testnetsEnabled') === null)
+{
+  global?.window?.localStorage.setItem('testnetsEnabled', 'true');
+}
+
 export const ENABLE_TESTNET =
-  PROD_ENV && global?.window?.localStorage.getItem('testnetsEnabled') === 'true';
+   global?.window?.localStorage.getItem('testnetsEnabled') === 'true';
 
 // determines if forks should be shown
 export const FORK_ENABLED =
@@ -72,6 +78,7 @@ export const networkConfigs = Object.keys(_networkConfigs).reduce((acc, value) =
  * Fork markets are generated for all markets on the underlying base chain.
  */
 
+
 export const marketsData = Object.keys(_marketsData).reduce((acc, value) => {
   acc[value] = _marketsData[value as keyof typeof CustomMarket];
   if (
@@ -86,6 +93,7 @@ export const marketsData = Object.keys(_marketsData).reduce((acc, value) => {
   }
   return acc;
 }, {} as { [key: string]: MarketDataType });
+
 
 export function getDefaultChainId() {
   return marketsData[availableMarkets[0]].chainId;
